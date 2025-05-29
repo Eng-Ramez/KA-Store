@@ -2,25 +2,30 @@ import { Box, TextField, Button, Typography, Paper, Container } from '@mui/mater
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
-export default function Login() {
+export default function Forget() {
 
 const {register,handleSubmit}=useForm();
+const navigate=useNavigate();
 
-const loginUser= async(data)=>{
-  const response=await axios.post(`http://mytshop.runasp.net/api/Account/Login`,data);
+const Forgetpassword= async(data)=>{
+  const response=await axios.post(`http://mytshop.runasp.net/api/Account/ForgotPassword`,data);
+  navigate('/confirmcode')
+  localStorage.setItem('email', data.email);
   console.log(response);
+
 }
+
 
   return (
     <Container maxWidth="sm" sx={{ mt: 7 }}>
       <Paper elevation={7} sx={{ p: 5 }}>
         <Typography variant="h4" align="center" gutterBottom>
-          Login
+          Reset Password
         </Typography>
         
-        <Box onSubmit={handleSubmit(loginUser)}
+        <Box onSubmit={handleSubmit(Forgetpassword)}
           component="form"
           sx={{
             display: 'flex',
@@ -40,26 +45,19 @@ const loginUser= async(data)=>{
             required
           />
           
-          <TextField
-            fullWidth
-            {...register('password')}
-            label="Password"
-            type="password"
-            variant="outlined"
-            required
-          />
-          <Link  to={'/forget_password'}>Did you forget your password?</Link>
+         
          
           
         
           
-          <Button 
+          <Button
+            
             variant="contained" 
             size="large" 
             sx={{ mt: 2 }}
             type="submit"
           >
-            Login
+            Send Code
           </Button>
            
         </Box>

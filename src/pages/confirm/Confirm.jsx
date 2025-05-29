@@ -2,13 +2,14 @@ import { Box, TextField, Button, Typography, Paper, Container } from '@mui/mater
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router';
 
-export default function Register() {
+export default function Confirm() {
 
 const {register,handleSubmit}=useForm();
 
-const registerUser= async(data)=>{
-  const response=await axios.post(`http://mytshop.runasp.net/api/Account/register`,data);
+const loginUser= async(data)=>{
+  const response=await axios.patch(`http://mytshop.runasp.net/api/Account/SendCode`,data);
   console.log(response);
 }
 
@@ -16,10 +17,10 @@ const registerUser= async(data)=>{
     <Container maxWidth="sm" sx={{ mt: 7 }}>
       <Paper elevation={7} sx={{ p: 5 }}>
         <Typography variant="h4" align="center" gutterBottom>
-          Register
+          Change Password
         </Typography>
         
-        <Box onSubmit={handleSubmit(registerUser)}
+        <Box onSubmit={handleSubmit(loginUser)}
           component="form"
           sx={{
             display: 'flex',
@@ -27,41 +28,26 @@ const registerUser= async(data)=>{
             gap: 2,
           }}
         >
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            <TextField
-            {...register('firstName')}
-              fullWidth
-              label="First Name"
-              variant="outlined"
-              required
-            />
-            <TextField
-              fullWidth
-              {...register('lastName')}
-              label="Last Name"
-              variant="outlined"
-              required
-            />
-          </Box>
-          
-          <TextField
-            fullWidth
-             {...register('userName')}
-            label="User Name"
-            variant="outlined"
-            required
-          />
-          
-          <TextField
+         <TextField
             fullWidth
             {...register('email')}
             label="Email"
-            type="email"
+            value={localStorage.getItem('email')}
+            type="text"
             variant="outlined"
             required
           />
           
-          <TextField
+           <TextField
+            fullWidth
+            {...register('code')}
+            label="Code"
+            type="password"
+            variant="outlined"
+            required
+          />
+
+           <TextField
             fullWidth
             {...register('password')}
             label="Password"
@@ -72,22 +58,16 @@ const registerUser= async(data)=>{
           
           <TextField
             fullWidth
-             {...register('confirmPassword')}
-            label="Confirm Password"
+            {...register('ConfirmPassword')}
+            label="New Password"
             type="password"
             variant="outlined"
             required
           />
+         
+         
           
-          <TextField
-            fullWidth
-             {...register('birthOfDate')}
-            label="Birth Date"
-            type="date"
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            required
-          />
+        
           
           <Button 
             variant="contained" 
@@ -95,8 +75,9 @@ const registerUser= async(data)=>{
             sx={{ mt: 2 }}
             type="submit"
           >
-            Register
+            Save Change
           </Button>
+           
         </Box>
       </Paper>
     </Container>

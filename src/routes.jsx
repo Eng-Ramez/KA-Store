@@ -6,6 +6,8 @@ import Shop from "./pages/shop/Shop";
 import Cart from "./pages/cart/Cart";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import Forget from "./pages/forget/Forget";
+import Confirm from "./pages/confirm/Confirm";
 
 const routes = createBrowserRouter([{
     path:'/',
@@ -34,6 +36,14 @@ const routes = createBrowserRouter([{
         {
             path:'/register',
             element:<Register/> 
+        },
+         {
+            path:'/forget_password',
+            element:<Forget/> 
+        },
+         {
+            path:'/confirmcode',
+            element:<Confirm/> 
         },
     
 ],
