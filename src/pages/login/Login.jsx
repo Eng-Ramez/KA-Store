@@ -10,6 +10,7 @@ const {register,handleSubmit}=useForm();
 
 const loginUser= async(data)=>{
   const response=await axios.post(`http://mytshop.runasp.net/api/Account/Login`,data);
+  localStorage.setItem('UserToken', response.data.token);
   console.log(response);
 }
 

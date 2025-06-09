@@ -8,6 +8,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Forget from "./pages/forget/Forget";
 import Confirm from "./pages/confirm/Confirm";
+import Details_product from "./pages/details_product/Details_product";
 
 const routes = createBrowserRouter([{
     path:'/',
@@ -44,6 +45,11 @@ const routes = createBrowserRouter([{
          {
             path:'/confirmcode',
             element:<Confirm/> 
+        },
+        {
+            path:'/product_details/:id',
+            element:<Details_product/>
+
         },
     
 ],
